@@ -3,8 +3,24 @@
 ## Task 1:
 Run a container using nginx image, and mount a directory from your host into the 
 Docker container. example: /home/samy/nginx:/home/nginx (bind mount)
+1. Create Bind Mount Directory
 ```bash
-
+mkdir nginx_bindMount
+cd nginx_bindMount
+pwd
+```
+2. Run a container using nginx image
+```bash
+docker run -d --name nginx_bindMount -v /root/nginx_bindMount:/user/share/nginx/html nginx
+docker exec -it nginx_bindMount bash
+```
+Echo any content to show when curl ip-address
+```bash
+cd /user/share/nginx/html
+echo "Hello from Bind Mount Nginx" > index.html
+exit
+docker inspect -f '{{.NetworkSettings.IPAddress}}' nginx_bindMount    ->172.17.0.2
+curl 172.17.0.2
 ```
 ---
 
